@@ -35,7 +35,7 @@ from app.configs.config import settings
 def get_url():
     user = settings.DB_USER
     password = settings.DB_PASSWORD
-    server = settings.DB_SERVER
+    server = settings.DB_HOST
     db = settings.DB_NAME
     return f"postgresql://{user}:{password}@{server}/{db}"
 

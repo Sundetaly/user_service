@@ -11,7 +11,7 @@ class Settings(BaseSettings):
 
     DB_USER: str
     DB_PASSWORD: str
-    DB_SERVER: str
+    DB_HOST: str
     DB_NAME: str
     DB_PORT: int = 5432
     DB_SCHEMA: str = "public"
@@ -33,7 +33,7 @@ class Settings(BaseSettings):
         if isinstance(v, str):
             return v
         return (
-            f"postgresql+asyncpg://{data['DB_USER']}:{data['DB_PASSWORD']}@{data['DB_SERVER']}/{data['DB_NAME']}"
+            f"postgresql+asyncpg://{data['DB_USER']}:{data['DB_PASSWORD']}@{data['DB_HOST']}/{data['DB_NAME']}"
         )
 
     class Config:
