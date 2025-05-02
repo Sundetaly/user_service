@@ -16,3 +16,8 @@ async def create_user(db: AsyncSession, user_data: UserCreate):
     await db.commit()
     await db.refresh(user)
     return user
+
+
+async def get_all_users(db: AsyncSession, limit: int = 100):
+    result = await db.execute(select(User).limit(limit))
+    return result.scalars().all()

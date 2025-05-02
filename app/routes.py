@@ -14,3 +14,8 @@ async def register_user(user: UserCreate, db: AsyncSession = Depends(get_db)):
     if existing:
         raise HTTPException(status_code=400, detail="User already exists")
     return await crud.create_user(db, user)
+
+
+@router.get("/", response_model=list[UserOut])
+async def list_users(limit: int = 100, db: AsyncSession = Depends(get_db)):
+    return await crud.get_all_users(db, limit)

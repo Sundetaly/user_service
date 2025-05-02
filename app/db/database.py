@@ -2,11 +2,8 @@ from asyncio import current_task
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker, async_scoped_session
 from sqlalchemy.orm import declarative_base
-from dotenv import load_dotenv
 
 from app.configs.config import settings
-
-load_dotenv()
 
 
 engine = create_async_engine(
