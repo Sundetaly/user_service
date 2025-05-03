@@ -1,13 +1,15 @@
 from typing import Dict, Any, ClassVar
 from pydantic import BaseModel
 
+from app.configs.config import settings
+
 
 class LogConfig(BaseModel):
     """Logging configuration to be set for the server"""
 
     LOGGER_NAME: str = "user_service_log"
     LOG_FORMAT: str = "%(asctime)s %(levelname)s [] [%(thread)d] [] [%(name)s] %(message)s"
-    LOG_LEVEL: str = "INFO"
+    LOG_LEVEL: str = "INFO" if settings.ENVIRONMENT == "prod" else "DEBUG"
 
     # Logging config
     version: int = 1
@@ -27,7 +29,7 @@ class LogConfig(BaseModel):
         },
     }
     loggers: Dict[str, Dict[str, Any]] = {
-        "event_bus_consumer_log": {"handlers": ["default"], "level": LOG_LEVEL},
+        "user_service_log": {"handlers": ["default"], "level": LOG_LEVEL},
         "uvicorn": {"handlers": ["default"], "level": LOG_LEVEL},
         "gunicorn": {"handlers": ["default"], "level": LOG_LEVEL},
     }

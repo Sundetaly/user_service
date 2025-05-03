@@ -5,10 +5,6 @@ from sqlalchemy import pool
 
 from alembic import context
 
-# import sys
-#
-# sys.path = ['', '..'] + sys.path[1:]
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -52,9 +48,8 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    url = get_url()
     context.configure(
-        url=url,
+        url=get_url(),
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},

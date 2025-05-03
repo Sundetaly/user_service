@@ -25,15 +25,14 @@ class Settings(BaseSettings):
 
     ENVIRONMENT: str
 
-    SHOW_DOCS_ENVIRONMENT: list = ("local", "dev")
-
     @field_validator("DATABASE_URL", mode="before")
     def assemble_db_connection(cls, v: Optional[str], info: ValidationInfo) -> Any:
-        data = info.data
+        env_values = info.data
         if isinstance(v, str):
             return v
         return (
-            f"postgresql+asyncpg://{data['DB_USER']}:{data['DB_PASSWORD']}@{data['DB_HOST']}/{data['DB_NAME']}"
+            f"postgresql+asyncpg://"
+            f"{env_values['DB_USER']}:{env_values['DB_PASSWORD']}@{env_values['DB_HOST']}/{env_values['DB_NAME']}"
         )
 
     class Config:
